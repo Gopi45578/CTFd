@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODU Cybersecurity Education</title>
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #303057, #f0f4f8); 
+      color: #003057;
+      scroll-behavior: smooth;
+    }
+
+    .header {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: #003057; 
+      color: white; 
+    }
+
+    .header img {
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      margin: 10px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      color: white; 
+    }
+
+    .header h2 {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0;
+      color: white; 
+    }
+
+    
+    .content {
+      padding: 50px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .box h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #2e3b4e;
+    }
+
+    .countdown-timer {
+      font-size: 26px;
+      font-weight: bold;
+      color: black; 
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: white; 
+      color: #404A5A; 
+      margin-top: 50px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 40px 20px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+      }
+
+      .header h2 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <img src="./img.png" alt="ODU Logo" />
+      <h1>Cybersecurity Education</h1>
+      <p>Old Dominion University’s M.S. in Cybersecurity program prepares you to lead in the ever-evolving tech landscape. As a student at a top R1 research institution, you’ll gain hands-on experience tackling real-world cybersecurity challenges, from threat 
+        detection to implementing preventive measures.Our graduates excel in roles with organizations like Booz Allen Hamilton and the NSA, or pursue teaching and research to shape the future of cybersecurity. At ODU, you’ll build the skills to drive innovation and safeguard technology in a digital world</p>
+    </div>
+
+    <div class="content">
+      <div class="box">
+        <h3>Upcoming Event</h3>
+        <p>ODU Cyber Competition 2025</p>
+        <div class="countdown-timer">{{ countdown }}</div>
+      </div>
+
+      <div class="box">
+        <h3>Event Details</h3>
+        <p>Join us for an exciting cybersecurity competition to showcase your skills and learn from industry leaders. A platform for innovation and excellence!</p>
+      </div>
+
+      <div class="box">
+        <h3>Contact Us</h3>
+        <p>Email: cyber@odu.edu</p>
+        <p>Phone: +1 (757) 683-3000</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      © 2025 Old Dominion University - Cybersecurity Education
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          countdown: '',
+          targetDate: new Date('2025-05-01T00:00:00').getTime(), 
+        };
+      },
+      methods: {
+        updateCountdown() {
+          const now = new Date().getTime();
+          const distance = this.targetDate - now;
+
+          if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            this.countdown = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+          } else {
+            this.countdown = 'Event Started!';
+          }
+        },
+      },
+      mounted() {
+        this.updateCountdown();
+        setInterval(this.updateCountdown, 1000); 
+      },
+    }).mount('#app');
+  </script>
+</body>
+</html>
