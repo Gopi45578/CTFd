@@ -299,7 +299,8 @@
 
 {% block scripts %}
 <script>
-	var STATE = {{ state | tojson }};
+  var STATE = {{ state | tojson | safe }};
+  console.log(STATE);
 </script>
 {% endblock %}
 
